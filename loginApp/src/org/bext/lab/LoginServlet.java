@@ -3,6 +3,7 @@ package org.bext.lab;
 import java.io.IOException;
 
 import javax.jms.Session;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,8 +29,9 @@ public class LoginServlet extends HttpServlet {
 		boolean result = loginService.authenticate(userId, password);
 		if (result) {
 			User user = loginService.getUserDetails(userId);
-			request.getSession().setAttribute("User", user);
-			response.sendRedirect("accesoOK.jsp"); 
+			request.setAttribute("User", user);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("accesoOK.jsp");
+			dispatcher.forward(request, response);
 			return;
 		}else{
 			response.sendRedirect("login.jsp");
