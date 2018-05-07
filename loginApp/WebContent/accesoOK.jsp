@@ -8,9 +8,10 @@
 </head>
 <body>
 <h3>Acceso Autorizado.</h3>
-<%
-  User user = (User) session.getAttribute("User");
-%>
-Buenvenido <%=user.getUserName() %>
+
+<jsp:useBean id="User" class="org.bext.lab.dto.User" scope="request">
+</jsp:useBean>
+Usando JSTL... jsp:useBean jsp:getProperty<br/>
+Bienvenido <jsp:getProperty property="userName" name="User"/>
 </body>
 </html>
